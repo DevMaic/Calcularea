@@ -1,3 +1,4 @@
+import 'package:calcularea/main.dart';
 import 'package:flutter/material.dart';
 import 'pagina3.dart';
 
@@ -8,6 +9,7 @@ void main() {
 class Pagina2 extends StatelessWidget {
   final int lados;
   final String poligono;
+
   final tipos = {3:4, 4:10, 5:2, 6:2, 7:2, 8:2};
   
   Pagina2({super.key, this.lados = 0, this.poligono = ''});
@@ -18,6 +20,9 @@ class Pagina2 extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('$lados'' lados'),
+          leading: BackButton(onPressed: () {
+            Navigator.of(context).pop(MaterialPageRoute(builder: (context) => MyApp(),),);
+          },),
         ),
         body: ListView(
           children: [
