@@ -5,10 +5,17 @@ void main() {
 }
 
 class Pagina3 extends StatelessWidget {
-  const Pagina3({super.key});
+  final String poligono;
+  final int tipo, lados;
+
+  const Pagina3({super.key, this.poligono = '', this.tipo = 0, this.lados = 0});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$lados lados'),
+      ),
+    );
   }
 }

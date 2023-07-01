@@ -31,13 +31,13 @@ class _MyAppState extends State<MyApp> {
                 alignment: WrapAlignment.center,
                 spacing: 2,
                 runSpacing: 2,
-                children: [
-                  Icon(path: 'assets/3lados.png', lados: 3),
-                  Icon(path: 'assets/4lados.png', lados: 4),
-                  Icon(path: 'assets/5lados.png', lados: 5),
-                  Icon(path: 'assets/6lados.png', lados: 6),
-                  Icon(path: 'assets/7lados.png', lados: 7),
-                  Icon(path: 'assets/8lados.png', lados: 8),
+                children: const [
+                  Icon(lados: 3, poligono: 'triangulo'),
+                  Icon(lados: 4, poligono: 'quadrado'),
+                  Icon(lados: 5, poligono: 'pentagono'),
+                  Icon(lados: 6, poligono: 'hexagono'),
+                  Icon(lados: 7, poligono: 'heptagono'),
+                  Icon(lados: 8, poligono: 'octogono'),
                 ],
               ),
             )
@@ -49,10 +49,10 @@ class _MyAppState extends State<MyApp> {
 }
 
 class Icon extends StatelessWidget {
-  final String path;
   final int lados;
+  final String poligono;
 
-  const Icon({super.key, this.path = '', this.lados = 0});
+  const Icon({super.key, this.lados = 0, this.poligono = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +60,10 @@ class Icon extends StatelessWidget {
       fit: BoxFit.fill,
       height: 150,
       width: 150,
-      image: AssetImage(path),
+      image: AssetImage('assets/$lados''lados.png'),
       child: InkWell(
         onTap:() {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Pagina2(numeroDeLados: "$lados Lados"),),);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Pagina2(lados: lados, poligono: poligono),),);
         },
       ),
     );

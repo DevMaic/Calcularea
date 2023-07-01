@@ -66,6 +66,29 @@ flutter:
   - assets/6lados.png
   - assets/7lados.png
   - assets/8lados.png
+  - assets/triangulo_tipo_1.png
+  - assets/triangulo_tipo_2.png
+  - assets/triangulo_tipo_3.png
+  - assets/triangulo_tipo_4.png
+  - assets/pentagono_tipo_1.png
+  - assets/pentagono_tipo_2.png
+  - assets/hexagono_tipo_1.png
+  - assets/hexagono_tipo_2.png
+  - assets/quadrado_tipo_1.png
+  - assets/quadrado_tipo_2.png
+  - assets/quadrado_tipo_3.png
+  - assets/quadrado_tipo_4.png
+  - assets/quadrado_tipo_5.png
+  - assets/quadrado_tipo_6.png
+  - assets/quadrado_tipo_7.png
+  - assets/quadrado_tipo_8.png
+  - assets/quadrado_tipo_9.png
+  - assets/quadrado_tipo_10.png
+  - assets/heptagono_tipo_1.png
+  - assets/heptagono_tipo_2.png
+  - assets/octogono_tipo_1.png
+  - assets/octogono_tipo_2.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
