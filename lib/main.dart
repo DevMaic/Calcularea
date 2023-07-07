@@ -1,3 +1,4 @@
+import 'package:calcularea/colors.dart';
 import 'pagina2.dart';
 import 'package:flutter/material.dart';
 
@@ -13,24 +14,38 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: themeif,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Calculárea"),
+          centerTitle: true,
+          title: Text("Calculárea", style: TextStyle(fontSize: 28),),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+              child: Image(
+                image: AssetImage('assets/logo_IF.png'),
+                width: 20,
+                height: 20,
+              ),
+            )
+          ],
         ),
-        body: Column(
+        body: ListView(
           children: [
             SizedBox(
-              height: 5,
+              height: 30,
             ),
             Align(
               child: Wrap(
                 alignment: WrapAlignment.center,
-                spacing: 2,
-                runSpacing: 2,
+                spacing: 15,
+                runSpacing: 8,
                 children: const [
                   Icon(lados: 3, poligono: 'triangulo'),
                   Icon(lados: 4, poligono: 'quadrado'),
@@ -40,7 +55,10 @@ class _MyAppState extends State<MyApp> {
                   Icon(lados: 8, poligono: 'octogono'),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
@@ -56,16 +74,44 @@ class Icon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink.image(
-      fit: BoxFit.fill,
-      height: 150,
-      width: 150,
-      image: AssetImage('assets/$lados''lados.png'),
-      child: InkWell(
-        onTap:() {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Pagina2(lados: lados, poligono: poligono),),);
-        },
-      ),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
+        child: Ink(
+          decoration: BoxDecoration(
+            //color: Color.fromARGB(255, 58, 115, 2),
+            boxShadow: [
+              BoxShadow(
+                //color: Color.fromARGB(255, 54, 170, 60).withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+              image: AssetImage('assets/$lados' 'lados.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+          height: 230,
+          width: 180,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      Pagina2(lados: lados, poligono: poligono),
+                ),
+              );
+            },
+            child: Align(
+              alignment: Alignment(0, 0.75),
+              child: Text(poligono.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+          ),
+        ),
+      )
     );
   }
 }

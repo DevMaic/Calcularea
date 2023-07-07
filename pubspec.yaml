@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_svg: ^1.1.6
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -60,34 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/3lados.png
-  - assets/4lados.png
-  - assets/5lados.png
-  - assets/6lados.png
-  - assets/7lados.png
-  - assets/8lados.png
-  - assets/triangulo_tipo_1.png
-  - assets/triangulo_tipo_2.png
-  - assets/triangulo_tipo_3.png
-  - assets/triangulo_tipo_4.png
-  - assets/pentagono_tipo_1.png
-  - assets/pentagono_tipo_2.png
-  - assets/hexagono_tipo_1.png
-  - assets/hexagono_tipo_2.png
-  - assets/quadrado_tipo_1.png
-  - assets/quadrado_tipo_2.png
-  - assets/quadrado_tipo_3.png
-  - assets/quadrado_tipo_4.png
-  - assets/quadrado_tipo_5.png
-  - assets/quadrado_tipo_6.png
-  - assets/quadrado_tipo_7.png
-  - assets/quadrado_tipo_8.png
-  - assets/quadrado_tipo_9.png
-  - assets/quadrado_tipo_10.png
-  - assets/heptagono_tipo_1.png
-  - assets/heptagono_tipo_2.png
-  - assets/octogono_tipo_1.png
-  - assets/octogono_tipo_2.png
+  - assets/
 
   #   - images/a_dot_ham.jpeg
 

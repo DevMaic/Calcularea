@@ -1,5 +1,6 @@
 import 'package:calcularea/main.dart';
 import 'package:flutter/material.dart';
+import 'colors.dart';
 import 'pagina3.dart';
 
 void main() {
@@ -9,7 +10,6 @@ void main() {
 class Pagina2 extends StatelessWidget {
   final int lados;
   final String poligono;
-
   final tipos = {3:4, 4:10, 5:2, 6:2, 7:2, 8:2};
   
   Pagina2({super.key, this.lados = 0, this.poligono = ''});
@@ -17,9 +17,23 @@ class Pagina2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData( 
+        primarySwatch: themeif,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('$lados'' lados'),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+              child: Image(
+                image: AssetImage('assets/logo_IF.png'),
+                width: 20,
+                height: 20,
+              ),
+            )
+          ],
           leading: BackButton(onPressed: () {
             Navigator.of(context).pop(MaterialPageRoute(builder: (context) => MyApp(),),);
           },),
@@ -27,19 +41,24 @@ class Pagina2 extends StatelessWidget {
         body: ListView(
           children: [
             SizedBox(
-              height: 5,
+              height: 30,
             ),
             Align(
               child: Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 2,
-                runSpacing: 2,
+                alignment: WrapAlignment.spaceEvenly,
+                crossAxisAlignment: WrapCrossAlignment.end,
+                spacing: 15,
+                runSpacing: 8,
                 children: [
-                  for(var i = tipos[lados];i!>0;i--) Icon(poligono: poligono, tipo: i, lados: lados),
+                  for(int i = 1;i <= tipos[lados]!;i++) Icon(poligono: poligono, tipo: i, lados: lados),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 20,
             )
           ],
+          
         ),
       ),
     );
@@ -54,12 +73,26 @@ class Icon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink.image(
-      fit: BoxFit.fill,
-      height: 150,
-      width: 150,
-      image: AssetImage('assets/$poligono''_tipo_$tipo''.png'),
+    return Ink(
+       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 10,
+          offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10),
+        image: DecorationImage(
+          image: AssetImage('assets/$poligono''_tipo_$tipo''.png'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      height: 180,
+      width: 180,
       child: InkWell(
+        borderRadius: BorderRadius.circular(10),
         onTap:() {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => Pagina3(poligono: poligono, tipo: tipo, lados: lados),),);
         },
