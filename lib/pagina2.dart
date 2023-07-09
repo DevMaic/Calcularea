@@ -48,7 +48,7 @@ class Pagina2 extends StatelessWidget {
                 alignment: WrapAlignment.spaceEvenly,
                 crossAxisAlignment: WrapCrossAlignment.end,
                 spacing: 15,
-                runSpacing: 8,
+                runSpacing: 12,
                 children: [
                   for(int i = 1;i <= tipos[lados]!;i++) Icon(poligono: poligono, tipo: i, lados: lados),
                 ],
@@ -89,8 +89,8 @@ class Icon extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      height: 180,
-      width: 180,
+      height: ((MediaQuery.of(context).size.shortestSide/2)-25),
+      width: ((MediaQuery.of(context).size.shortestSide/2)-25),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap:() {

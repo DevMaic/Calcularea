@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
                 alignment: WrapAlignment.center,
                 spacing: 15,
                 runSpacing: 8,
-                children: const [
+                children: [
                   Icon(lados: 3, poligono: 'triangulo'),
                   Icon(lados: 4, poligono: 'quadrado'),
                   Icon(lados: 5, poligono: 'pentagono'),
@@ -69,8 +69,14 @@ class _MyAppState extends State<MyApp> {
 class Icon extends StatelessWidget {
   final int lados;
   final String poligono;
+  final Map nomesComAcento = {'triangulo':'Triângulo',
+                              'quadrado':'Quadrilátero', 
+                              'pentagono':'Pentágono',
+                              'hexagono':'Hexágono',
+                              'heptagono':'Heptágono',
+                              'octogono':'Octógono'};
 
-  const Icon({super.key, this.lados = 0, this.poligono = ''});
+  Icon({super.key, this.lados = 0, this.poligono = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +96,12 @@ class Icon extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-              image: AssetImage('assets/$lados' 'lados.png'),
+              image: AssetImage('assets/$lados''lados.png'),
               fit: BoxFit.fill,
             ),
           ),
-          height: 230,
-          width: 180,
+          height: (((MediaQuery.of(context).size.shortestSide/2)-25)*1.27),
+          width: ((MediaQuery.of(context).size.shortestSide/2)-25),
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () {
@@ -108,7 +114,7 @@ class Icon extends StatelessWidget {
             },
             child: Align(
               alignment: Alignment(0, 0.75),
-              child: Text(poligono.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+              child: Text(nomesComAcento[poligono], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
           ),
         ),
       )

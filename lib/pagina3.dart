@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 void main() {
   runApp(Pagina3());
 }
-//quadrado 8 e 10
+
 class Pagina3 extends StatefulWidget {
   final String poligono;
   final int tipo, lados;
@@ -38,7 +38,7 @@ class _Pagina3State extends State<Pagina3> {
           case 2:
             return ((operandos[0]*operandos[1])/2).toStringAsFixed(2);
           case 3:
-            return ((operandos[0]*operandos[1]*sin(operandos[2]))/2).toStringAsFixed(2);
+            return ((operandos[0]*operandos[1]*sin(operandos[2]*(pi/180)))/2).toStringAsFixed(2);
           case 4:
             double p = ((operandos[0]+operandos[1]+operandos[2])/2);
             return (sqrt(p*(p-operandos[0])*(p-operandos[1])*(p-operandos[2]))).toStringAsFixed(2);
@@ -51,11 +51,11 @@ class _Pagina3State extends State<Pagina3> {
           case 2:
             return (operandos[0]*operandos[1]).toStringAsFixed(2);
           case 3:
-            return (((operandos[0]+operandos[1])*operandos[2])/2).toStringAsFixed();
+            return (((operandos[0]+operandos[1])*operandos[2])/2).toStringAsFixed(2);
           case 4:
-            return (((operandos[0]+operandos[1])*operandos[2])/2).toStringAsFixed();
+            return (((operandos[0]+operandos[1])*operandos[2])/2).toStringAsFixed(2);
           case 5:
-            return (operandos[0]*operandos[1]).toStringAsFixed(2);
+            return ((operandos[0]*operandos[1])/2).toStringAsFixed(2);
           case 6:
             return (operandos[0]*operandos[1]).toStringAsFixed(2);
           case 7:
@@ -69,8 +69,8 @@ class _Pagina3State extends State<Pagina3> {
           case 9:
             List aux1 = [operandos[0],operandos[1],operandos[4]];
             List aux2 = [operandos[2],operandos[3],operandos[4]];
-            return (double.parse(calcular(aux1, 'triangulo', 1)) + 
-                    double.parse(calcular(aux2, 'triangulo', 1))).toStringAsFixed(2);
+            return (double.parse(calcular(aux1, 'triangulo', 4)) + 
+                    double.parse(calcular(aux2, 'triangulo', 4))).toStringAsFixed(2);
           case 10:
             return (((1/2)*operandos[1]*operandos[2]*(sqrt(1-pow(((2-pow(operandos[4], 2))/2), 2)))) +
                      (1/2)*operandos[3]*operandos[0]*(sqrt(1-pow(((2-pow(operandos[5], 2))/2), 2)))).toStringAsFixed(2);
@@ -83,10 +83,10 @@ class _Pagina3State extends State<Pagina3> {
           case 2:
             List aux1 = [operandos[2], operandos[3], operandos[6]];
             List aux2 = [operandos[1], operandos[5], operandos[6]];
-            List aux3 = [operandos[0], operandos[2], operandos[5]];
-            return (calcular(aux1, 'triangulo', 4) + 
-                    calcular(aux2, 'triangulo', 4) + 
-                    calcular(aux3, 'triangulo', 4));
+            List aux3 = [operandos[0], operandos[4], operandos[5]];
+            return ((double.parse(calcular(aux1, 'triangulo', 4)) + 
+                    double.parse(calcular(aux2, 'triangulo', 4)) + 
+                    double.parse(calcular(aux3, 'triangulo', 4))).toStringAsFixed(2));
         }
         break;
       case 'hexagono':
@@ -145,16 +145,18 @@ class _Pagina3State extends State<Pagina3> {
   }
 
   String converteChar(int i) {
-    if(widget.quantMedidas[widget.poligono][widget.tipo][1]!=1) {
+    if(widget.poligono == 'triangulo' && widget.tipo == 3) {
+      return 'θ';
+    } else if(widget.quantMedidas[widget.poligono][widget.tipo][1]==1){
+      if(widget.poligono == 'quadrado' && widget.tipo >= 7) {
+        return String.fromCharCode(120 + i);
+      } else {
+        return 'h';
+      }
+    } else if(widget.lados == 7 || widget.lados == 8) {
       return String.fromCharCode(118 + i);
-    } else if (widget.poligono == 'triangulo' && widget.tipo == 3) {
-      return String.fromCharCode(233 + i);
-    } else if(widget.poligono == 'quadrado'){
+    } else {
       return String.fromCharCode(120 + i);
-    } else if(widget.quantMedidas[widget.poligono][widget.tipo][1]>3){
-      return String.fromCharCode(118);
-    }else{
-      return String.fromCharCode(104);
     }
   }
 
@@ -217,7 +219,6 @@ class _Pagina3State extends State<Pagina3> {
                     if(text.isNotEmpty) {
                       Pagina3.operandos[i] = double.parse(text);
                     }
-                    debugPrint('${Pagina3.operandos}');
                   },
                 ),
                 for(int i=0;i<widget.quantMedidas[widget.poligono][widget.tipo][1];i++) TextField(
@@ -233,9 +234,9 @@ class _Pagina3State extends State<Pagina3> {
                       }
                     }
                     if(text.isNotEmpty) {
-                      Pagina3.operandos[i] = double.parse(text);
+                      Pagina3.operandos[(widget.quantMedidas[widget.poligono][widget.tipo][0]+i)] = double.parse(text);
                     }
-                    debugPrint('${Pagina3.operandos}');
+                    //debugPrint('${Pagina3.operandos} - ${widget.quantMedidas[widget.poligono][widget.tipo][0]+i}');
                   },
                 ),
                 SizedBox(
@@ -244,7 +245,7 @@ class _Pagina3State extends State<Pagina3> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      Pagina3.resultado = calcular(Pagina3.operandos, widget.poligono, widget.tipo);
+                      Pagina3.resultado = '${calcular(Pagina3.operandos, widget.poligono, widget.tipo)}'' U.A';
                     });
                   }, 
                   child: Text('Calcular'),
